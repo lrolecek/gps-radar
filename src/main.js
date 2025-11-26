@@ -14,6 +14,11 @@ import {
 import { initOrientation } from './orientation'
 import { initGPS } from './gps'
 
+
+log.message('App start - v0.01')
+log.divider()
+
+
 // brno
 let currentPos = {
   lat: null,
@@ -60,26 +65,47 @@ const handlePosition = (coords) => {
   updateDisplay()
 }
 
+
 const updateDisplay = () => {
+  // update text info
   elLat.textContent = currentPos.lat === null ? 'null' : `${currentPos.lat.toFixed(4)}`
   elLon.textContent = currentPos.lon === null ? 'null' : `${currentPos.lon.toFixed(4)}`
   elAlpha.textContent = currentPos.alpha === null ? 'null' : currentPos.alpha.toFixed(0) + '°'
 
-  const alphaNorth = currentPos.alpha === null
-    ? -90
-    : -90 + currentPos.alpha
+  // calculate distance and bearing to target
+  const distance = getGPSDistance(currentPos, goalPos)
+  const bearing = getGPSBearing(currentPos, goalPos)
 
+  // calculate angle to target
+  // based on where the top of the phone is pointing
+  const alpha = currentPos.alpha === null ? 0 : currentPos.alpha
+  const angle = alpha + bearing
+
+  // update distance
+  elGoalDistance.textContent = distance < 1000
+    ? distance.toFixed(0) + ' m'
+    : (distance / 1000).toFixed(2) + ' km'
+
+  // update arrow
   if (currentPos.alpha === null) {
     elGoalArrow.style.opacity = 0.2
   } else {
     elGoalArrow.style.opacity = 1
   }
-  elGoalArrow.style.transform = `rotate(${alphaNorth.toFixed(0)}deg)`
+  elGoalArrow.style.transform = `rotate(${angle.toFixed(0)}deg)`
 
+  // update radar
+  // distance from center
+  const distanceFromCenter = distance < 1000 ? distance / 1000 : 1
+
+  const angleRad = (angle / 360) * (2 * Math.PI) - (Math.PI * 0.5);
+  const x = Math.cos(angleRad) * 50 * distanceFromCenter + 50
+  const y = Math.sin(angleRad) * 50 * distanceFromCenter + 50
+
+  elRadarGoal.style.left = `${x}%`;
+  elRadarGoal.style.top = `${y}%`;
 }
-
-log.message('App start')
-log.divider()
 
 initGPS(handlePosition)
 initOrientation(elCompassBtn, handleOrientation)
+updateDisplay()
