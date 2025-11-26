@@ -21,20 +21,24 @@ log.divider()
 
 // current position
 let currentPos = {
-  lat: null,
   lon: null,
+  lat: null,
   accuracy: null,
   alpha: null,
 }
 
 // goal position
 // let goalPos = {
-//   lat: 49.2337505,
 //   lon: 16.6253590,
+//   lat: 49.2337505,
+// }
+// let goalPos = {
+//   lon: 16.6232588,
+//   lat: 49.8836224,
 // }
 let goalPos = {
-  lat: 49.8836224,
-  lon: 16.6232588,
+  lon: 16.6235874,
+  lat: 49.2239618,
 }
 
 console.log('Distance to goal:', getGPSDistance(currentPos, goalPos))
@@ -72,8 +76,8 @@ const handlePosition = (coords) => {
 
 const updateDisplay = () => {
   // update text info
-  elLat.textContent = currentPos.lat === null ? 'null' : `${currentPos.lat.toFixed(7)}`
   elLon.textContent = currentPos.lon === null ? 'null' : `${currentPos.lon.toFixed(7)}`
+  elLat.textContent = currentPos.lat === null ? 'null' : `${currentPos.lat.toFixed(7)}`
   elAlpha.textContent = currentPos.alpha === null ? 'null' : currentPos.alpha.toFixed(0) + '°'
 
   // calculate distance and bearing to target
