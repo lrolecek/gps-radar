@@ -63,7 +63,7 @@ const handlePosition = (coords) => {
 const updateDisplay = () => {
   elLat.textContent = currentPos.lat === null ? 'null' : `${currentPos.lat.toFixed(4)}`
   elLon.textContent = currentPos.lon === null ? 'null' : `${currentPos.lon.toFixed(4)}`
-  elAlpha.textContent = currentPos.alpha === null ? 'null' : currentPos.heading.toFixed(0) + '°'
+  elAlpha.textContent = currentPos.alpha === null ? 'null' : currentPos.alpha.toFixed(0) + '°'
 
   const alphaNorth = currentPos.alpha === null
     ? -90
