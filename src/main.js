@@ -46,6 +46,9 @@ const handleOrientation = (alpha, beta, gama) => {
     ...currentPos,
     heading: alpha,
   }
+  if (alpha === null) {
+    log.message('Orientation failed, alpha = null')
+  }
   updateDisplay()
 }
 
@@ -61,6 +64,14 @@ const updateDisplay = () => {
   elLat.textContent = currentPos.lat === null ? 'null' : `${currentPos.lat.toFixed(4)}`
   elLon.textContent = currentPos.lon === null ? 'null' : `${currentPos.lon.toFixed(4)}`
   elAlpha.textContent = currentPos.heading === null ? 'null' : currentPos.heading.toFixed(0) + '°'
+
+  if (currentPos.heading === null) {
+    elGoalArrow.style.opacity = 0.2
+    elGoalArrow.style.transform = 'rotate(0)'
+  } else {
+    elGoalArrow.style.opacity = 0.1
+    elGoalArrow.style.transform = `rotate(${currentPos.heading.toFixed(0)}deg)`
+  }
 }
 
 log.message('App start')
