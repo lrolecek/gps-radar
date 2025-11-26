@@ -19,7 +19,7 @@ log.message('App start - v0.01')
 log.divider()
 
 
-// brno
+// current position
 let currentPos = {
   lat: null,
   lon: null,
@@ -27,10 +27,10 @@ let currentPos = {
   alpha: null,
 }
 
-// prague
+// goal position
 let goalPos = {
-  lat: 50.0755,
-  lon: 14.4378
+  lat: 49.2337505,
+  lon: 16.6253590,
 }
 
 console.log('Distance to goal:', getGPSDistance(currentPos, goalPos))
