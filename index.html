@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>gps-radar</title>
+  </head>
+  <body>
+
+    <div class="container">
+
+      <div id="radar">
+        <div id="radar-outer">
+          <div id="radar-inner"></div>
+          <div id="radar-center"></div>
+          <div id="radar-goal"></div>
+        </div>
+      </div>
+
+      <div id="goal">
+        <div class="goal-inner">
+          <img id="goal-arrow" src="/images/arrow.svg" alt="arrow">
+          <div id="goal-distance">
+            100 m
+          </div>
+        </div>
+        <button id="compass-btn" class="btn">Enable compass</button>
+      </div>
+
+      <div id="info">
+        <div>Lat: <span id="lat">0</span></div>
+        <div>Lon: <span id="lon">0</span></div>
+        <div>Alpha: <span id="alpha">0</span></div>
+      </div>
+
+      <div id="log">
+        <pre></pre>
+      </div>
+
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

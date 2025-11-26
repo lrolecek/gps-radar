@@ -1,0 +1,24 @@
+#goal {
+  width: 100%;
+  padding: 20px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.goal-inner {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+#goal-arrow {
+  width: 80px;
+  height: 80px;
+}
+
+#goal-distance {
+  font-size: 48px;
+  font-weight: bold;
+}
