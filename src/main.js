@@ -28,17 +28,10 @@ let currentPos = {
 }
 
 // goal position
-// let goalPos = {
-//   lon: 16.6253590,
-//   lat: 49.2337505,
-// }
-// let goalPos = {
-//   lon: 16.6232588,
-//   lat: 49.8836224,
-// }
+// MEWS
 let goalPos = {
-  lon: 16.6235874,
-  lat: 49.2239618,
+  lon: 14.4302007,
+  lat: 50.0751690,
 }
 
 console.log('Distance to goal:', getGPSDistance(currentPos, goalPos))
