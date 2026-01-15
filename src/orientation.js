@@ -10,8 +10,10 @@ const enableOrientationListener = (enableBtn, orientationHandler) => {
   ? orientationHandler
   : defaultOrientationHandler
 
-  window.addEventListener('deviceorientation', (event) => {
-    handler(event.alpha, event.beta, event.gamma);
+  const hasAbsolute = 'ondeviceorientationabsolute' in window
+
+  window.addEventListener(hasAbsolute ? 'deviceorientationabsolute' : 'deviceorientation', (event) => {
+    handler(event);
   }, true)
 
   if (enableBtn) {

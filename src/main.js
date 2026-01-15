@@ -25,14 +25,20 @@ let currentPos = {
   lat: null,
   accuracy: null,
   alpha: null,
+  absolute: null,
 }
 
 // goal position
-// MEWS
+// ALBERT BRNO
 let goalPos = {
-  lon: 14.4302007,
-  lat: 50.0751690,
+  lon: 16.6235874,
+  lat: 49.2239618,
 }
+// MEWS PRAHA
+// let goalPos = {
+//   lon: 14.4302007,
+//   lat: 50.0751690,
+// }
 
 console.log('Distance to goal:', getGPSDistance(currentPos, goalPos))
 console.log('Bearing to goal:', getGPSBearing(currentPos, goalPos))
@@ -44,13 +50,17 @@ const elGoalDistance = document.querySelector('#goal-distance')
 const elLat = document.querySelector('#lat')
 const elLon = document.querySelector('#lon')
 const elAlpha = document.querySelector('#alpha')
+const elAbsolute = document.querySelector('#absolute')
 
 const elCompassBtn = document.querySelector('#compass-btn')
 
-const handleOrientation = (alpha, beta, gama) => {
+const handleOrientation = (event) => {
+  const {alpha, absolute} = event
+
   currentPos = {
     ...currentPos,
     alpha: alpha,
+    absolute: absolute,
   }
   if (alpha === null) {
     log.message('Orientation failed, alpha = null')
@@ -72,6 +82,7 @@ const updateDisplay = () => {
   elLon.textContent = currentPos.lon === null ? 'null' : `${currentPos.lon.toFixed(7)}`
   elLat.textContent = currentPos.lat === null ? 'null' : `${currentPos.lat.toFixed(7)}`
   elAlpha.textContent = currentPos.alpha === null ? 'null' : currentPos.alpha.toFixed(0) + '°'
+  elAbsolute.textContent = currentPos.absolute ? 'absolute' : 'relative'
 
   // calculate distance and bearing to target
   const distance = getGPSDistance(currentPos, goalPos)
