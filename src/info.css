@@ -1,4 +1,4 @@
-#info {
+.info {
   width: 100%;
   padding: 20px;
   background: #f0f0f0;
@@ -8,8 +8,8 @@
   border: 1px solid dodgerblue;
 }
 
-#info div {
-  width: 33.333%;
+.info div {
+  flex: 1 1 33.333%;
 }
 
 #info div span {
