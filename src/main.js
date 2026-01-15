@@ -52,21 +52,17 @@ const elLat = document.querySelector('#lat')
 const elLon = document.querySelector('#lon')
 const elAlpha = document.querySelector('#alpha')
 
-const elAbsolute = document.querySelector('#absolute')
-const elWebkitCompassHeading = document.querySelector('#webkit-compass')
-
 const elCompassBtn = document.querySelector('#compass-btn')
 
 const handleOrientation = (event) => {
-  const {alpha, absolute} = event
 
-  const webkitCompassHeading = 'webkitCompassHeading' in event ? event.webkitCompassHeading : 'not supported'
+  const alpha = typeof event.webkitCompassHeading === 'number'
+    ? event.webkitCompassHeading
+    : event.alpha
 
   currentPos = {
     ...currentPos,
     alpha,
-    absolute,
-    webkitCompassHeading,
   }
   if (alpha === null) {
     log.message('Orientation failed, alpha = null')
@@ -88,8 +84,6 @@ const updateDisplay = () => {
   elLon.textContent = currentPos.lon === null ? 'null' : `${currentPos.lon.toFixed(7)}`
   elLat.textContent = currentPos.lat === null ? 'null' : `${currentPos.lat.toFixed(7)}`
   elAlpha.textContent = currentPos.alpha === null ? 'null' : currentPos.alpha.toFixed(0) + '°'
-  elAbsolute.textContent = currentPos.absolute ? 'absolute' : 'relative'
-  elWebkitCompassHeading.textContent = typeof currentPos.WebkitCompassHeading === 'number' ?  currentPos.webkitCompassHeading.toFixed(0) + '°' : currentPos.WebkitCompassHeading
 
   // calculate distance and bearing to target
   const distance = getGPSDistance(currentPos, goalPos)
